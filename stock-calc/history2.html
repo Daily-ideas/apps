@@ -6,6 +6,10 @@
     <title>產品版本歷史記錄 - WebView最終版</title>
     <!-- 所有的樣式都已內嵌，確保網頁完全離線可用且無 CDN 依賴 -->
     <style>
+        * {
+          -webkit-tap-highlight-color: transparent; /* Android WebView 的點擊高亮 */
+        }
+        
         /* 基礎設置 - 模擬 Tailwind Reset 和 Inter 字體 */
         body {
             font-family: 'Inter', sans-serif;

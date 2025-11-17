@@ -7,6 +7,9 @@
     <!-- 載入 Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        * {
+          -webkit-tap-highlight-color: transparent; /* Android WebView 的點擊高亮 */
+        }
         /* 設定主要字體為 Inter */
         html { font-family: 'Inter', sans-serif; }
     </style>
@@ -28,85 +31,88 @@
 </head>
 <body class="bg-bg-light min-h-screen flex items-center justify-center p-4 sm:p-6 md:p-8">
 
-    <div class="w-full max-w-4xl bg-card-bg shadow-2xl rounded-xl p-6 sm:p-10 md:p-12 space-y-8">
-        <!-- 標題 -->
-        <header class="text-center border-b pb-4">
-            <h1 class="text-3xl sm:text-4xl font-bold text-text-strong tracking-tight">
-                隱私權政策 (Privacy Policy)
-            </h1>
-            <p class="mt-2 text-lg text-primary font-medium">
-                請您花點時間看完以下內容
+<div class="w-full max-w-4xl bg-card-bg shadow-2xl rounded-xl p-6 sm:p-10 md:p-12 space-y-8">
+    <!-- 標題 -->
+    <header class="text-center border-b pb-4">
+        <h1 class="text-3xl sm:text-4xl font-bold text-text-strong tracking-tight">
+            隱私權政策 (Privacy Policy)
+        </h1>
+        <p class="mt-2 text-lg text-primary font-medium">
+            請您花點時間看完以下內容
+        </p>
+    </header>
+
+    <!-- 主要隱私聲明區塊 -->
+    <section class="space-y-6">
+        <h2 class="text-2xl font-semibold text-text-strong border-l-4 border-primary pl-3">
+            開發者聲明
+        </h2>
+        <!-- 核心摘要 - 內文改為 text-lg -->
+        <div class="bg-indigo-50 p-4 rounded-lg text-text-strong font-semibold text-lg">
+            <p>
+                簡單講，本作品不會收集您的個人敏感資訊，所以更不可能私自使用、或與他人分享、販售您的個資。
             </p>
-        </header>
+        </div>
 
-        <!-- 主要隱私聲明區塊 -->
-        <section class="space-y-6">
-            <h2 class="text-2xl font-semibold text-text-strong border-l-4 border-primary pl-3">
-                開發者聲明
-            </h2>
-            <div class="bg-indigo-50 p-4 rounded-lg text-text-strong font-semibold">
-                <!-- 核心摘要 -->
-                <p>
-                    簡單講，本作品不會收集您的個人敏感資訊，所以更不可能私自使用、或與他人分享、販售您的個資。
-                </p>
-            </div>
+        <h2 class="text-2xl font-semibold text-text-strong border-l-4 border-primary pl-3 pt-4">
+            作品資訊收集與 Google 服務
+        </h2>
 
-            <h2 class="text-2xl font-semibold text-text-strong border-l-4 border-primary pl-3 pt-4">
-                作品資訊收集與 Google 服務
-            </h2>
-
-            <!-- Google 分析工具說明 -->
-            <div class="space-y-4 text-text-soft">
-                <p>
-                    <strong>數據用途：</strong>我使用了 Google 推薦的工具來瞭解市場反應狀況。其中會統計安裝次數、裝置型式、用戶地理位置、即時使用人數、當機回報等等資訊。
-                </p>
-
-                <p>
-                    <strong>廣告服務：</strong>如果您正在使用免費版本，Google 會依照您個人喜好來提供廣告內容。
-                </p>
-
-                <p>
-                    <strong>收集責任：</strong>因為使用了 Google 提供的上述服務、所以 Google 會負責收集相關資訊。
-                </p>
-
-                <p>
-                    <strong>開發者權限：</strong>Google 以暱名、加密的方式收集資訊，身為開發者的我不會介入、也無法介入。Google 最終提供給我的報表不會包含您的個資，基本上只有統計數據。
-                </p>
-            </div>
-        </section>
-        
-        <!-- Google 條款連結 -->
-        <section class="pt-4 border-t border-gray-200">
-            <h3 class="text-xl font-semibold text-text-strong mb-3">
-                瞭解更多 Google 隱私權條款
-            </h3>
-            <p class="text-text-soft">
-                如果您想瞭解 Google 如何收集、使用您的資訊，請參考以下網址：
+        <!-- Google 分析工具說明 - 內文改為 text-lg -->
+        <div class="space-y-4 text-text-soft text-lg">
+            <p>
+                <strong>數據用途：</strong>我使用了 Google 推薦的工具來瞭解市場反應狀況。其中會統計安裝次數、裝置型式、用戶地理位置、即時使用人數、當機回報等等資訊。
             </p>
-            <a href="https://policies.google.com/privacy?hl=zh-TW" target="_blank" class="inline-flex items-center mt-3 px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-primary hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition duration-150 ease-in-out">
-                隱私權與條款 – Google
-                <!-- 外部連結圖示 -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                </svg>
-            </a>
-        </section>
 
-        <!-- 同意與解除安裝說明 -->
-        <footer class="pt-6 border-t border-gray-200 space-y-4">
-            <h3 class="text-xl font-semibold text-text-strong">
-                使用者同意
-            </h3>
-            <p class="text-red-600 bg-red-50 p-4 rounded-lg font-medium shadow-inner">
-                當您繼續使用本作品，則表示您完全瞭解、並且同意接受以上內容。
+            <p>
+                <strong>廣告服務：</strong>如果您正在使用免費版本，Google 會依照您個人喜好來提供廣告內容。
             </p>
-            <p class="text-text-soft italic">
-                反之、如果您無法接受以上內容，則您應該立即停止使用、並解除安裝本作品。
-            </p>
-        </footer>
 
-    </div>
+            <p>
+                <strong>收集責任：</strong>因為使用了 Google 提供的上述服務、所以 Google 會負責收集相關資訊。
+            </p>
+
+            <p>
+                <strong>開發者權限：</strong>Google 以暱名、加密的方式收集資訊，身為開發者的我不會介入、也無法介入。Google 最終提供給我的報表不會包含您的個資，基本上只有統計數據。
+            </p>
+        </div>
+    </section>
+
+    <!-- Google 條款連結 -->
+    <section class="pt-4 border-t border-gray-200">
+        <h3 class="text-xl font-semibold text-text-strong mb-3">
+            瞭解更多 Google 隱私權條款
+        </h3>
+        <!-- 內文改為 text-lg -->
+        <p class="text-text-soft text-lg">
+            如果您想瞭解 Google 如何收集、使用您的資訊，請參考以下網址：
+        </p>
+        <a href="https://policies.google.com/privacy?hl=zh-TW" target="_blank" class="inline-flex items-center mt-3 px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-primary hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition duration-150 ease-in-out">
+            隱私權與條款 – Google
+            <!-- 外部連結圖示 -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+            </svg>
+        </a>
+    </section>
+
+    <!-- 同意與解除安裝說明 -->
+    <footer class="pt-6 border-t border-gray-200 space-y-4">
+        <h3 class="text-xl font-semibold text-text-strong">
+            使用者同意
+        </h3>
+        <!-- 內文改為 text-lg -->
+        <p class="text-red-600 bg-red-50 p-4 rounded-lg font-medium shadow-inner text-lg">
+            當您繼續使用本作品，則表示您完全瞭解、並且同意接受以上內容。
+        </p>
+        <!-- 內文改為 text-lg -->
+        <p class="text-text-soft italic text-lg">
+            反之、如果您無法接受以上內容，則您應該立即停止使用、並解除安裝本作品。
+        </p>
+    </footer>
+
+</div>
 
 </body>
 </html>

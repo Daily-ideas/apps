@@ -4,50 +4,205 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>產品版本歷史記錄</title>
-    <!-- 引入 Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 設定 Inter 字體 -->
+    <!-- 移除了 Tailwind CSS CDN，改用自包含 CSS 確保 WebView 相容性 -->
+    <!-- 所有的樣式都已內嵌，確保網頁完全離線可用 -->
     <style>
+        /* 基礎設置 - 模擬 Tailwind Reset 和 Inter 字體 */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #ffffff; /* 純白色背景 */
             min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased; /* 模擬 antialiased */
         }
-        /* 隱藏內容的高度動畫，使收合/展開更平滑 */
+
+        /* 主容器樣式 - 模擬 max-w-4xl mx-auto py-8 px-3 sm:px-6 lg:px-8 */
+        .container {
+            max-width: 896px; /* max-w-4xl */
+            margin-left: auto;
+            margin-right: auto;
+            padding-top: 2rem;    /* py-8 */
+            padding-bottom: 2rem; /* py-8 */
+            padding-left: 0.75rem;  /* px-3 */
+            padding-right: 0.75rem; /* px-3 */
+        }
+        @media (min-width: 640px) { /* sm:px-6 */
+            .container {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+        }
+        @media (min-width: 1024px) { /* lg:px-8 */
+            .container {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+        }
+
+        /* 版本容器 - 模擬 space-y-4 */
+        #changelog-container > div + div {
+            margin-top: 1rem;
+        }
+        
+        /* 單一卡片樣式 - 模擬 rounded-xl overflow-hidden border border-gray-200 */
+        .version-card {
+            border-radius: 0.75rem; /* rounded-xl */
+            overflow: hidden;
+            border: 1px solid #e5e7eb; /* border-gray-200 */
+        }
+        
+        /* Header 樣式基底 - 模擬 p-3 sm:p-4 flex justify-between items-center cursor-pointer transition duration-200 ease-in-out */
+        .card-header {
+            padding: 0.75rem 0.75rem; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            user-select: none; /* 防止內容被選中 */
+        }
+        @media (min-width: 640px) {
+            .card-header {
+                padding: 1rem;
+            }
+        }
+
+        /* Header (最新版) 樣式 - 模擬 bg-emerald-500 text-white shadow-xl hover:bg-emerald-600 */
+        .card-header.latest {
+            background-color: #10b981; /* bg-emerald-500 */
+            color: #ffffff; /* text-white */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1); /* shadow-xl */
+        }
+        .card-header.latest:hover {
+            background-color: #059669; /* hover:bg-emerald-600 */
+        }
+
+        /* Header (舊版) 樣式 - 模擬 bg-gray-100 text-gray-800 shadow-md hover:bg-gray-200 */
+        .card-header.old {
+            background-color: #f3f4f6; /* bg-gray-100 */
+            color: #1f2937; /* text-gray-800 */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); /* shadow-md */
+        }
+        .card-header.old:hover {
+            background-color: #e5e7eb; /* hover:bg-gray-200 */
+        }
+
+        /* 標題與標籤的 Flex 容器 - 模擬 flex items-center space-x-4 */
+        .header-content {
+            display: flex;
+            align-items: center;
+        }
+        .header-content > * + * {
+            margin-left: 1rem; /* space-x-4 */
+        }
+        
+        /* 標題文字 - 模擬 text-lg font-semibold */
+        .version-title {
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 600; /* font-semibold */
+        }
+
+        /* 標籤 (最新版本) 樣式 - 模擬 text-xs font-bold px-3 py-1 rounded-full bg-yellow-300 text-gray-900 shadow-md */
+        .latest-tag {
+            font-size: 0.75rem; /* text-xs */
+            font-weight: 700; /* font-bold */
+            padding: 0.25rem 0.75rem; /* px-3 py-1 */
+            border-radius: 9999px; /* rounded-full */
+            background-color: #fcd34d; /* bg-yellow-300 */
+            color: #111827; /* text-gray-900 */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); /* shadow-md */
+        }
+
+        /* 箭頭圖標基底 - 模擬 flex items-center */
+        .arrow-container {
+            display: flex;
+            align-items: center;
+        }
+        /* 箭頭圖標 - 模擬 w-5 h-5 transition-transform duration-300 */
+        .arrow-icon {
+            width: 1.25rem; /* w-5 */
+            height: 1.25rem; /* h-5 */
+            transition: transform 0.3s ease-in-out;
+        }
+        /* 箭頭顏色 */
+        .card-header.latest .arrow-icon { color: #ffffff; }
+        .card-header.old .arrow-icon { color: #6b7280; /* text-gray-500 */ }
+        /* 箭頭旋轉 (收合時) */
+        .arrow-icon.rotated {
+            transform: rotate(180deg);
+        }
+        
+        /* 內容區塊的展開/收合 CSS 邏輯 */
         .collapsible-content {
-            /* 動畫時間恢復為 0.4 秒 (400ms) */
+            /* 動畫屬性 */
             transition: max-height 0.4s ease-in-out, opacity 0.4s ease;
             overflow: hidden;
             max-height: 0;
-            padding: 0; /* 確保沒有內邊距 */
+            padding: 0;
             opacity: 0;
         }
-        /* 展開內容時，設置不透明度 */
         .collapsible-content.expanded {
             opacity: 1;
         }
         
-        /* 內層列表 (UL) 的邊距樣式 */
-        .collapsible-content ul {
-            /* 修正: 移除 margin 過渡，使其瞬間應用，確保 scrollHeight 讀取準確 */
-            margin-top: 0;
-            margin-bottom: 0;
+        /* 內容區塊背景色 (最新版) - 模擬 bg-emerald-50 */
+        .content-bg-latest {
+            background-color: #ecfdf5; 
+        }
+        /* 內容區塊背景色 (舊版) - 模擬 bg-white */
+        .content-bg-old {
+            background-color: #ffffff; 
         }
 
-        /* 內容展開時，為內層列表添加上下邊距 (瞬間應用) */
-        .collapsible-content.expanded ul {
-            margin-top: 1rem; /* pt-4 = 16px */
-            margin-bottom: 1rem; /* pb-4 = 16px */
+        /* 內層列表 (UL) 的樣式 - 模擬 list-none space-y-2 px-4 sm:px-6 */
+        .detail-list {
+            list-style: none;
+            padding-left: 1rem; /* px-4 */
+            padding-right: 1rem; /* px-4 */
+        }
+        @media (min-width: 640px) { /* sm:px-6 */
+            .detail-list {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+        }
+        .detail-list li + li {
+            margin-top: 0.5rem; /* space-y-2 */
+        }
+        
+        /* 內容展開時，為內層列表添加上下邊距 (由 JS 決定) */
+        .collapsible-content.expanded .detail-list {
+            margin-top: 1rem; /* pt-4 */
+            margin-bottom: 1rem; /* pb-4 */
+        }
+
+        /* 詳細列表項目樣式 - 模擬 flex items-start mb-2 */
+        .detail-item {
+            display: flex;
+            align-items: flex-start;
+        }
+        .detail-item svg {
+            width: 1rem; /* w-4 */
+            height: 1rem; /* h-4 */
+            margin-top: 0.25rem; /* mt-1 */
+            margin-right: 0.5rem; /* mr-2 */
+            flex-shrink: 0;
+            color: #059669; /* text-emerald-600 */
+        }
+        .detail-item span {
+            color: #374151; /* text-gray-700 */
+            line-height: 1.5;
         }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- 調整整體的上下留白 (py-8) 和左右留白 (px-3) -->
-    <div class="max-w-4xl mx-auto py-8 px-3 sm:px-6 lg:px-8">
+    <!-- 主容器 -->
+    <div class="container">
         
-        <!-- 版本迭代列表容器 (將由 JavaScript 渲染內容) -->
-        <div id="changelog-container" class="space-y-4">
+        <!-- 版本迭代列表容器 -->
+        <div id="changelog-container">
             <!-- 這裡會動態插入版本卡片 -->
         </div>
 
@@ -55,13 +210,13 @@
 
     <script>
         // ==========================================================
-        // 1. 版本資料 (已替換為使用者提供的新資料，日期為版本名稱)
+        // 1. 版本資料
         // ==========================================================
 
         const versionData = [
             { 
                 id: 'v20241023', 
-                version: "2024.10.23", 
+                version: "2024.10.23 (最新)", 
                 isLatest: true, 
                 details: [
                     "解決部份已知當機問題。"
@@ -371,52 +526,53 @@
 
             // Header 樣式
             const headerClasses = isLatest 
-                ? 'bg-emerald-500 text-white shadow-xl hover:bg-emerald-600'
-                : 'bg-gray-100 text-gray-800 shadow-md hover:bg-gray-200';
+                ? 'card-header latest'
+                : 'card-header old';
 
             // Icon 顏色
-            const iconColor = isLatest ? 'text-white' : 'text-gray-500';
+            const iconClasses = isLatest ? 'arrow-icon' : 'arrow-icon old';
             
-            // 內容區塊背景顏色: 最新版用淡綠, 舊版用白色
-            const contentBgClass = isLatest ? 'bg-emerald-50' : 'bg-white';
+            // 內容區塊背景顏色
+            const contentBgClass = isLatest ? 'content-bg-latest' : 'content-bg-old';
 
             // 內容區塊的展開/收合樣式
-            const contentClasses = `collapsible-content ${isExpanded ? 'expanded' : ''}`;
+            const contentClasses = `collapsible-content ${isExpanded ? 'expanded' : ''} ${contentBgClass}`;
             
             // 箭頭狀態反轉。展開時不旋轉 (指向下)，收合時旋轉 (指向上)。
-            const iconStateClass = isExpanded ? '' : 'transform rotate-180';
+            const iconStateClass = isExpanded ? '' : 'rotated';
 
             // 詳細內容列表
             const detailsHtml = data.details.map(detail => `
-                <li class="flex items-start mb-2">
-                    <svg class="w-4 h-4 mt-1 mr-2 flex-shrink-0 text-emerald-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                    <span class="text-gray-700">${detail}</span>
+                <li class="detail-item">
+                    <!-- 綠色勾選圖標 SVG -->
+                    <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                    <span>${detail}</span>
                 </li>
             `).join('');
 
             return `
-                <div class="rounded-xl overflow-hidden border border-gray-200" id="card-${data.id}">
-                    <!-- 可點擊的標題 (Header) - 調整內邊距為 p-3 sm:p-4 -->
+                <div class="version-card" id="card-${data.id}">
+                    <!-- 可點擊的標題 (Header) -->
                     <div 
-                        class="p-3 sm:p-4 flex justify-between items-center cursor-pointer transition duration-200 ease-in-out ${headerClasses}"
+                        class="${headerClasses}"
                         data-version-id="${data.id}"
                         onclick="toggleContent('${data.id}')"
                     >
-                        <div class="flex items-center space-x-4">
-                            <h2 class="text-lg font-semibold">${data.version}</h2>
-                            ${isLatest ? '<span class="text-xs font-bold px-3 py-1 rounded-full bg-yellow-300 text-gray-900 shadow-md">最新版本</span>' : ''}
+                        <div class="header-content">
+                            <h2 class="version-title">${data.version}</h2>
+                            ${isLatest ? '<span class="latest-tag">最新版本</span>' : ''}
                         </div>
                         
                         <!-- 箭頭圖標 (旋轉表示展開/收合) -->
-                        <div class="flex items-center">
-                            <svg class="w-5 h-5 transition-transform duration-300 ${iconStateClass} ${iconColor}" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
+                        <div class="arrow-container">
+                            <svg class="${iconClasses} ${iconStateClass}" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
                         </div>
                     </div>
 
-                    <!-- 內容區塊 (Content) - 使用條件式背景色 -->
-                    <div id="content-${data.id}" class="${contentClasses} ${contentBgClass}">
-                        <!-- Ul 元素負責水平 padding (px-4/sm:px-6) 和垂直 margin (瞬間應用) -->
-                        <ul class="list-none space-y-2 px-4 sm:px-6">
+                    <!-- 內容區塊 (Content) -->
+                    <div id="content-${data.id}" class="${contentClasses}">
+                        <!-- Ul 元素負責列表內容 -->
+                        <ul class="detail-list">
                             ${detailsHtml}
                         </ul>
                     </div>
@@ -426,28 +582,23 @@
         
         /**
          * 處理 transitionend 事件的監聽器
-         * 使用 currentExpandedId 判斷是展開結束還是收合結束
          */
         const handleTransitionEnd = (event) => {
             const targetContent = event.currentTarget;
             
-            // 確保只處理 max-height 的過渡
             if (event.propertyName !== 'max-height') return;
 
             const targetId = targetContent.id.replace('content-', '');
 
             // 判斷是展開結束還是收合結束
             if (currentExpandedId === targetId) {
-                // Case 1: 展開結束 (Expand Finished)
-                // max-height 已經到達目標高度，現在安全地設為 'none'，恢復響應式
+                // Case 1: 展開結束，恢復響應式高度
                 targetContent.style.maxHeight = 'none';
             } else {
-                // Case 2: 收合結束 (Collapse Finished)
-                // max-height 已經是 0，現在安全移除 'expanded' 類別，進行最終清理 (移除 margin/opacity)
+                // Case 2: 收合結束，移除 'expanded' 類別
                 targetContent.classList.remove('expanded'); 
             }
             
-            // 移除監聽器以防止多次觸發
             targetContent.removeEventListener('transitionend', handleTransitionEnd);
         };
 
@@ -464,21 +615,16 @@
             if (targetId === currentExpandedId) {
                 const currentContent = document.getElementById(`content-${currentExpandedId}`);
                 if (currentContent) {
-                    // 1. 設置為當前實際高度 (如果先前是 'none' 必須先轉為像素值)
                     currentContent.style.maxHeight = currentContent.scrollHeight + "px";
-                    
-                    // 2. 添加 transitionend 監聽器
                     currentContent.addEventListener('transitionend', handleTransitionEnd);
                     
-                    // 3. 在下一幀開始過渡到 0，保留 'expanded' 類別！
                     requestAnimationFrame(() => {
                         currentContent.style.maxHeight = 0;
                     });
                     
-                    // 收合時，箭頭應指向上方 (旋轉 180 度)
-                    icon.classList.add('rotate-180');
+                    icon.classList.add('rotated'); // 箭頭指向上
                 }
-                currentExpandedId = null; // 設置為 null，表示收合意圖
+                currentExpandedId = null; 
                 return;
             }
 
@@ -486,42 +632,32 @@
             if (currentExpandedId) {
                 const prevContent = document.getElementById(`content-${currentExpandedId}`);
                 if (prevContent) {
-                    // 設置為當前實際高度，然後過渡到 0
                     prevContent.style.maxHeight = prevContent.scrollHeight + "px";
-                    
-                    // 添加 transitionend 監聽器
                     prevContent.addEventListener('transitionend', handleTransitionEnd);
                     
                     requestAnimationFrame(() => {
                         prevContent.style.maxHeight = 0;
                     });
                     
-                    // 旋轉先前項目的箭頭，使其指向上方 (收合狀態)
                     const prevIcon = prevContent.previousElementSibling.querySelector('svg');
-                    prevIcon.classList.add('rotate-180');
+                    prevIcon.classList.add('rotated');
                 }
             }
 
             // 2. 展開新的內容
             const targetContent = document.getElementById(`content-${targetId}`);
             if (targetContent) {
-                // 1. 立即添加 expanded class (margin 和 opacity 瞬間應用)
                 targetContent.classList.add('expanded'); 
-                
-                // 2. 讀取 scrollHeight (由於 margin 是瞬間應用的，此時讀取是精確的)
                 const contentHeight = targetContent.scrollHeight;
                 
-                // 3. 設置為精確高度，並添加 transitionend 監聽器
                 targetContent.addEventListener('transitionend', handleTransitionEnd);
 
-                // 4. 在下一幀設置 max-height 為精確高度，啟動動畫
                 requestAnimationFrame(() => {
                     targetContent.style.maxHeight = contentHeight + "px";
                 });
                 
-                // 展開時，箭頭應指向下方 (移除旋轉)
-                icon.classList.remove('rotate-180');
-                currentExpandedId = targetId; // 設置為目標 ID，表示展開意圖
+                icon.classList.remove('rotated'); // 箭頭指向下
+                currentExpandedId = targetId; 
             }
         }
 
@@ -541,14 +677,14 @@
                 if (latestContent) {
                     // 確保 latestContent 有 expanded 樣式
                     latestContent.classList.add('expanded');
-                    // 關鍵修正：將 max-height 設為 'none'，讓內容在載入時完全展開並保持響應式
+                    // 將 max-height 設為 'none'，讓內容在載入時完全展開並保持響應式
                     latestContent.style.maxHeight = 'none'; 
                 }
                 
                 if (latestHeader) {
                     // 初始化時，展開的項目箭頭應指向下方 (移除旋轉)
                     const latestIcon = latestHeader.querySelector('svg');
-                    latestIcon.classList.remove('rotate-180');
+                    latestIcon.classList.remove('rotated');
                 }
             }
         });

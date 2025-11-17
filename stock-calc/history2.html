@@ -99,17 +99,17 @@
             margin-left: 1rem; 
         }
         
-        /* 標題文字 */
+        /* 標題文字 - 已放大 */
         .version-title {
-            font-size: 1.125rem; /* text-lg */
+            font-size: 1.25rem; /* 放大至 text-xl */
             font-weight: 600; 
         }
 
-        /* 標籤 (最新版本) 樣式 */
+        /* 標籤 (最新版本) 樣式 - 已放大至與版本號相同尺寸 */
         .latest-tag {
-            font-size: 0.75rem; /* text-xs */
+            font-size: 1.25rem; /* 放大至與 .version-title 相同 */
             font-weight: 700; 
-            padding: 0.25rem 0.75rem; 
+            padding: 0.35rem 0.85rem; /* 調整邊距以匹配新字體大小 */
             border-radius: 9999px; 
             background-color: #fcd34d; /* bg-yellow-300 */
             color: #111827; /* text-gray-900 */
@@ -190,6 +190,7 @@
             color: #059669; /* text-emerald-600 */
         }
         .detail-item span {
+            font-size: 1.125rem; /* 內容文字整體放大至 text-lg */
             color: #374151; /* text-gray-700 */
             line-height: 1.5;
         }

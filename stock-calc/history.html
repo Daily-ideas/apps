@@ -1,270 +1,558 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="zh-tw" xmlns="http://www.w3.org/1999/xhtml">
-
+<!DOCTYPE html>
+<html lang="zh-Hant">
 <head>
-    <title>
-        版本更新記錄
-    </title>
-    <meta charset="utf-8"/>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-    <style type="text/css">
-        * {
-            /*margin: 0;
-            padding: 0;
-            border: 0;*/
-            /*font-family: "微軟正黑體", "黑體", Verdana, Arial, Helvetica, sans-serif;*/
-            line-height: 20px;
-        }
-
-        body,
-        div,
-        dl,
-        dt,
-        dd,
-        ul,
-        ol,
-        li,
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6,
-        pre,
-        form,
-        fieldset,
-        input,
-        textarea,
-        p,
-        blockquote,
-        th,
-        td {
-            /*margin: 0;
-            padding: 0;*/
-        }
-
-        html,
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>產品版本歷史記錄</title>
+    <!-- 引入 Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 設定 Inter 字體 -->
+    <style>
         body {
-            width: 100%;
-            height: 100%;
-            font-size: 0;
-            display: initial;
-            /*background-color: #ededed;*/
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff; /* 純白色背景 */
+            min-height: 100vh;
+        }
+        /* 隱藏內容的高度動畫，使收合/展開更平滑 */
+        .collapsible-content {
+            /* 動畫時間恢復為 0.4 秒 (400ms) */
+            transition: max-height 0.4s ease-in-out, opacity 0.4s ease;
+            overflow: hidden;
+            max-height: 0;
+            padding: 0; /* 確保沒有內邊距 */
+            opacity: 0;
+        }
+        /* 展開內容時，設置不透明度 */
+        .collapsible-content.expanded {
+            opacity: 1;
+        }
+        
+        /* 內層列表 (UL) 的邊距樣式 */
+        .collapsible-content ul {
+            /* 修正: 移除 margin 過渡，使其瞬間應用，確保 scrollHeight 讀取準確 */
+            margin-top: 0;
+            margin-bottom: 0;
         }
 
-        #main {
-            /*border: 2px solid blue;*/
-            font-size: 16px;
-            color: gray;
-            margin: 20px;
-        }
-
-        #content {
-            /*min-width: 1000px;
-            min-height: 300px;
-            width: 1000px;*/
-            display: table;
-            border: 2px /*solid*/ green;
-            /*padding-right: 20px;*/
-            margin: auto;
-        }
-
-        h1 {
-            line-height: normal;
-            font-size: 1.8em;
-        }
-
-        h2 {
-            font-size: 1.4em;
-            <!--margin-top: 30px;-->
-            margin-bottom: 5px;
-            margin-bottom: 10px;
-        }
-
-        ul {
-            /*margin-top: 50px;*/
-            padding: 0;
-        }
-
-        li {
-            /*margin-top: 30px;*/
-            margin-left: 20px;
-        }
-        p {
-            /*margin-top: 10px;
-            line-height: normal;*/
-            font-size: 1.1em;
-            line-height: 1.4;
-            margin: 0;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        .border{
-            border: solid 1px #cccccc;
-        }
-        img {
-            width: 100%;
-            max-width: 380px;
-            display: block;
-            margin: 0 auto;
-        }
-        p > img {
-            display: inline-block;
-            max-width: 20px;
-            vertical-align: middle;
-        }
-        br {
-            line-height: 1;
+        /* 內容展開時，為內層列表添加上下邊距 (瞬間應用) */
+        .collapsible-content.expanded ul {
+            margin-top: 1rem; /* pt-4 = 16px */
+            margin-bottom: 1rem; /* pb-4 = 16px */
         }
     </style>
 </head>
+<body class="antialiased">
 
-<body>
-<div id="main">
-    <div id="content">
-        <ul>
-            <h2>2024.10.23</h2>
-            <li><p>解決部份已知當機問題。</p></li>
-            <br/>
-            <h2>2024.9.20</h2>
-            <li><p>解決部份已知當機問題。</p></li>
-            <li><p>修正已知錯誤。</p></li>
-            <li><p>更新程式庫。</p></li>
-            <br/>
-            <h2>2024.9.17</h2>
-            <li><p>解決部份已知當機問題。</p></li>
-            <br/>
-            <h2>2024.9.13</h2>
-            <li><p>解決部份已知當機問題。</p></li>
-            <li><p>更新程式庫。</p></li>
-            <br/>
-            <h2>2024.9.8</h2>
-            <li><p>解決部份已知問題。</p></li>
-            <br/>
-            <h2>2024.9.4 (免費版)</h2>
-            <li><p>解決部份已知當機問題。</p></li>
-            <br/>
-            <h2>2024.8.31</h2>
-            <li><p>應用程式背景架構大翻新。</p></li>
-            <li><p>畫面風格大改版。</p></li>
-            <li><p>新增主選單自訂隱藏選項功能。</p></li>
-            <li><p>[除權息獲利] 與 [除權息參考價] 整合並改名為 [除權息]。</p></li>
-            <li><p>各單元多項細部優化。</p></li>
-            <li><p>解決部份已知當機問題。</p></li>
-            <br/>
-            <h2>2023.8.24</h2>
-            <li><p>解決部份當機問題。</p></li>
-            <br/>
-            <h2>2023.8.16</h2>
-            <li><p>解決部份當機問題。</p></li>
-            <br/>
-            <h2>2023.8.15</h2>
-            <li><p>解決部份當機問題。</p></li>
-            <br/>
-            <h2>2023.7.15</h2>
-            <li><p>修正在某些語系無法輸入的錯誤。</p></li>
-            <li><p>【綜合試算、交易試算、分價試算、獲利門檻試算】四個單元現在支援縮放手勢，可以隨時調整文字大小。</p></li>
-            <br/>
-            <h2>2023.6.23</h2>
-            <li><p>修正手續費、交易稅小數以下處理規則。增加零股最低手續費設定。</p></li>
-            <br/>
-            <h2>2023.6.19</h2>
-            <li><p>程式優化，買賣損益單元更新、漲跌試算單元更新、現沖建議價位單元更新。</p></li>
-            <br/>
-            <h2>2023.6.8</h2>
-            <li><p>程式優化。</p></li>
-            <br/>
-            <h2>2023.6.4</h2>
-            <li><p>程式庫更新與優化，一般交易單元更新。</p></li>
-            <br/>
-            <h2>2023.5.26</h2>
-            <li><p>程式庫更新與優化，一般交易單元更新。</p></li>
-            <br/>
-            <h2>2019.12.29</h2>
-            <li><p>更新類別庫。</p></li>
-            <br/>
-            <h2>2019.11.14</h2>
-            <li><p>更新類別庫</p></li>
-            <br/>
-            <h2>2019.7.7</h2>
-            <li><p>修正計算機單元無法剪貼的問題，popupMenu超出畫面的問題。</p></li>
-            <br/>
-            <h2>2019.5.13</h2>
-            <li><p>修正付費購買後無法移除廣告的問題。</p></li>
-            <br/>
-            <h2>2019.1.27</h2>
-            <li><p>修正漲跌試算字體異常。</p></li>
-            <li><p>修正融資損益手續費預設錯誤。</p></li>
-            <li><p>修正Android Pie閃退問題。</p></li>
-            <li><p>修正超大金額閃退問題。</p></li>
-            <li><p>支援長螢幕顯示，界面調整。</p></li>
-            <li><p>已知問題：千萬以上金額計算錯誤將在未來版本修正。</p></li>
-            <br/>
-            <h2>2018.10.1</h2>
-            <li><p>更新類別庫、支援 Android Pie。</p></li>
-            <li><p>新增隱私權政策。</p></li>
-            <br/>
-            <h2>2018.2.19</h2>
-            <li><p>修正部份裝置當機問題</p></li>
-            <br/>
-            <h2>2018.2.18</h2>
-            <li><p>修正部份裝置當機問題</p></li>
-            <br/>
-            <h2>2017.11.22</h2>
-            <li><p>修正部份裝置當機問題。</p></li>
-            <li><p>新增【一般綜合試算】單元，</p></li>
-            <li><p>新單元整合了 [買賣損益] + [漲跌試算] + [建議價位] 等功能於一身。</p></li>
-            <br/>
-            <h2>2017.6.7</h2>
-            <li><p>停止支援Android 4.0版以下系統。</p></li>
-            <li><p>交易稅選單新增現股當沖項目。</p></li>
-            <li><p>修正擔保維持率無法變更的問題。</p></li>
-            <br/>
-            <h2>2017.1.26</h2>
-            <li><p>新增【權證損益】手中的權證究竟是賣掉划算、還是履約划算？本單元可以分別試算賣出權證、履約 (現金結算與證券給付) 等收支與損益供您參考。</p></li>
-            <li><p>新增【權證除權息】擔心除權息影響您持有的權證價值嗎？本單元可試算除權息後的履約價、行使比例、標的股價。</p></li>
-            <br/>
-            <h2>2017.1.16</h2>
-            <li><p>交易稅率對話框新增常用選項。</p></li>
-            <li><p>部份視覺呈現調整。</p></li>
-            <li><p>程式架構優化。</p></li>
-            <br/>
-            <h2>2016.12.16</h2>
-            <li><p>停止播放全螢幕廣告，更換廣告刊登方式。</p></li>
-            <li><p>新增單元『現沖建議價位』，幫您計算最適當回補沖銷價位。</p></li>
-            <li><p>偏好設定新增功能『自訂主選單排序』，允許您將最常用功能擺放在最顯眼處。</p></li>
-            <li><p>部份視覺呈現調整。</p></li>
-            <li><p>程式架構優化。</p></li>
-            <br/>
-            <h2>2016.10.25</h2>
-            <li><p>更改除權息單元股票股利單位與說明內容。</p></li>
-            <li><p>修正內購驗證機制。</p></li>
-            <br/>
-            <h2>2016.10.10</h2>
-            <li><p>內部程式結構大翻新、提升運行效率。</p></li>
-            <li><p>提升對巨大金額的支援。</p></li>
-            <li><p>除權息獲利單元增加補充保費與扣抵稅額計算。</p></li>
-            <li><p>偏好設定新增移除廣告選項。</p></li>
-            <br/>
-            <h2>2016.4.11</h2>
-            <li><p>[買賣損益、漲跌試算、除權息獲利、除權息參考價] 等單元改版。</p></li>
-            <br/>
-            <h2>2016.2.2</h2>
-            <li><p>上線首日</p></li>
-            <br/>
-        </ul>
-        <section>
-        </section>
-        <section>
-        </section>
+    <!-- 調整整體的上下留白 (py-8) 和左右留白 (px-3) -->
+    <div class="max-w-4xl mx-auto py-8 px-3 sm:px-6 lg:px-8">
+        
+        <!-- 版本迭代列表容器 (將由 JavaScript 渲染內容) -->
+        <div id="changelog-container" class="space-y-4">
+            <!-- 這裡會動態插入版本卡片 -->
+        </div>
+
     </div>
-</div>
-</body>
 
+    <script>
+        // ==========================================================
+        // 1. 版本資料 (已替換為使用者提供的新資料，日期為版本名稱)
+        // ==========================================================
+
+        const versionData = [
+            { 
+                id: 'v20241023', 
+                version: "2024.10.23", 
+                isLatest: true, 
+                details: [
+                    "解決部份已知當機問題。"
+                ] 
+            },
+            { 
+                id: 'v20240920', 
+                version: "2024.9.20", 
+                isLatest: false, 
+                details: [
+                    "解決部份已知當機問題。", 
+                    "修正已知錯誤。", 
+                    "更新程式庫。"
+                ] 
+            },
+            { 
+                id: 'v20240917', 
+                version: "2024.9.17", 
+                isLatest: false, 
+                details: [
+                    "解決部份已知當機問題。"
+                ] 
+            },
+            { 
+                id: 'v20240913', 
+                version: "2024.9.13", 
+                isLatest: false, 
+                details: [
+                    "解決部份已知當機問題。", 
+                    "更新程式庫。"
+                ] 
+            },
+            { 
+                id: 'v20240908', 
+                version: "2024.9.8", 
+                isLatest: false, 
+                details: [
+                    "解決部份已知問題。"
+                ] 
+            },
+            { 
+                id: 'v20240904', 
+                version: "2024.9.4 (免費版)", 
+                isLatest: false, 
+                details: [
+                    "解決部份已知當機問題。"
+                ] 
+            },
+            { 
+                id: 'v20240831', 
+                version: "2024.8.31", 
+                isLatest: false, 
+                details: [
+                    "應用程式背景架構大翻新。",
+                    "畫面風格大改版。",
+                    "新增主選單自訂隱藏選項功能。",
+                    "[除權息獲利] 與 [除權息參考價] 整合並改名為 [除權息]。",
+                    "各單元多項細部優化。",
+                    "解決部份已知當機問題。"
+                ] 
+            },
+            { 
+                id: 'v20230824', 
+                version: "2023.8.24", 
+                isLatest: false, 
+                details: [
+                    "解決部份當機問題。"
+                ] 
+            },
+            { 
+                id: 'v20230816', 
+                version: "2023.8.16", 
+                isLatest: false, 
+                details: [
+                    "解決部份當機問題。"
+                ] 
+            },
+            { 
+                id: 'v20230815', 
+                version: "2023.8.15", 
+                isLatest: false, 
+                details: [
+                    "解決部份當機問題。"
+                ] 
+            },
+            { 
+                id: 'v20230715', 
+                version: "2023.7.15", 
+                isLatest: false, 
+                details: [
+                    "修正在某些語系無法輸入的錯誤。",
+                    "【綜合試算、交易試算、分價試算、獲利門檻試算】四個單元現在支援縮放手勢，可以隨時調整文字大小。"
+                ] 
+            },
+            { 
+                id: 'v20230623', 
+                version: "2023.6.23", 
+                isLatest: false, 
+                details: [
+                    "修正手續費、交易稅小數以下處理規則。增加零股最低手續費設定。"
+                ] 
+            },
+            { 
+                id: 'v20230619', 
+                version: "2023.6.19", 
+                isLatest: false, 
+                details: [
+                    "程式優化，買賣損益單元更新、漲跌試算單元更新、現沖建議價位單元更新。"
+                ] 
+            },
+            { 
+                id: 'v20230608', 
+                version: "2023.6.8", 
+                isLatest: false, 
+                details: [
+                    "程式優化。"
+                ] 
+            },
+            { 
+                id: 'v20230604', 
+                version: "2023.6.4", 
+                isLatest: false, 
+                details: [
+                    "程式庫更新與優化，一般交易單元更新。"
+                ] 
+            },
+            { 
+                id: 'v20230526', 
+                version: "2023.5.26", 
+                isLatest: false, 
+                details: [
+                    "程式庫更新與優化，一般交易單元更新。"
+                ] 
+            },
+            { 
+                id: 'v20191229', 
+                version: "2019.12.29", 
+                isLatest: false, 
+                details: [
+                    "更新類別庫。"
+                ] 
+            },
+            { 
+                id: 'v20191114', 
+                version: "2019.11.14", 
+                isLatest: false, 
+                details: [
+                    "更新類別庫"
+                ] 
+            },
+            { 
+                id: 'v20190707', 
+                version: "2019.7.7", 
+                isLatest: false, 
+                details: [
+                    "修正計算機單元無法剪貼的問題，popupMenu超出畫面的問題。"
+                ] 
+            },
+            { 
+                id: 'v20190513', 
+                version: "2019.5.13", 
+                isLatest: false, 
+                details: [
+                    "修正付費購買後無法移除廣告的問題。"
+                ] 
+            },
+            { 
+                id: 'v20190127', 
+                version: "2019.1.27", 
+                isLatest: false, 
+                details: [
+                    "修正漲跌試算字體異常。",
+                    "修正融資損益手續費預設錯誤。",
+                    "修正Android Pie閃退問題。",
+                    "修正超大金額閃退問題。",
+                    "支援長螢幕顯示，界面調整。",
+                    "已知問題：千萬以上金額計算錯誤將在未來版本修正。"
+                ] 
+            },
+            { 
+                id: 'v20181001', 
+                version: "2018.10.1", 
+                isLatest: false, 
+                details: [
+                    "更新類別庫、支援 Android Pie。",
+                    "新增隱私權政策。"
+                ] 
+            },
+            { 
+                id: 'v20180219', 
+                version: "2018.2.19", 
+                isLatest: false, 
+                details: [
+                    "修正部份裝置當機問題"
+                ] 
+            },
+            { 
+                id: 'v20180218', 
+                version: "2018.2.18", 
+                isLatest: false, 
+                details: [
+                    "修正部份裝置當機問題"
+                ] 
+            },
+            { 
+                id: 'v20171122', 
+                version: "2017.11.22", 
+                isLatest: false, 
+                details: [
+                    "修正部份裝置當機問題。",
+                    "新增【一般綜合試算】單元，",
+                    "新單元整合了 [買賣損益] + [漲跌試算] + [建議價位] 等功能於一身。"
+                ] 
+            },
+            { 
+                id: 'v20170607', 
+                version: "2017.6.7", 
+                isLatest: false, 
+                details: [
+                    "停止支援Android 4.0版以下系統。",
+                    "交易稅選單新增現股當沖項目。",
+                    "修正擔保維持率無法變更的問題。"
+                ] 
+            },
+            { 
+                id: 'v20170126', 
+                version: "2017.1.26", 
+                isLatest: false, 
+                details: [
+                    "新增【權證損益】手中的權證究竟是賣掉划算、還是履約划算？本單元可以分別試算賣出權證、履約 (現金結算與證券給付) 等收支與損益供您參考。",
+                    "新增【權證除權息】擔心除權息影響您持有的權證價值嗎？本單元可試算除權息後的履約價、行使比例、標的股價。"
+                ] 
+            },
+            { 
+                id: 'v20170116', 
+                version: "2017.1.16", 
+                isLatest: false, 
+                details: [
+                    "交易稅率對話框新增常用選項。",
+                    "部份視覺呈現調整。",
+                    "程式架構優化。"
+                ] 
+            },
+            { 
+                id: 'v20161216', 
+                version: "2016.12.16", 
+                isLatest: false, 
+                details: [
+                    "停止播放全螢幕廣告，更換廣告刊登方式。",
+                    "新增單元『現沖建議價位』，幫您計算最適當回補沖銷價位。",
+                    "偏好設定新增功能『自訂主選單排序』，允許您將最常用功能擺放在最顯眼處。",
+                    "部份視覺呈現調整。",
+                    "程式架構優化。"
+                ] 
+            },
+            { 
+                id: 'v20161025', 
+                version: "2016.10.25", 
+                isLatest: false, 
+                details: [
+                    "更改除權息單元股票股利單位與說明內容。",
+                    "修正內購驗證機制。"
+                ] 
+            },
+            { 
+                id: 'v20161010', 
+                version: "2016.10.10", 
+                isLatest: false, 
+                details: [
+                    "內部程式結構大翻新、提升運行效率。",
+                    "提升對巨大金額的支援。",
+                    "除權息獲利單元增加補充保費與扣抵稅額計算。",
+                    "偏好設定新增移除廣告選項。"
+                ] 
+            },
+            { 
+                id: 'v20160411', 
+                version: "2016.4.11", 
+                isLatest: false, 
+                details: [
+                    "[買賣損益、漲跌試算、除權息獲利、除權息參考價] 等單元改版。"
+                ] 
+            },
+            { 
+                id: 'v20160202', 
+                version: "2016.2.2", 
+                isLatest: false, 
+                details: [
+                    "上線首日"
+                ] 
+            },
+        ];
+
+        // ==========================================================
+        // 2. 應用程式邏輯與渲染
+        // ==========================================================
+        
+        // 追蹤目前展開的版本 ID
+        let currentExpandedId = versionData.find(v => v.isLatest)?.id || null;
+        
+        /**
+         * 創建單個版本卡片的 HTML 結構
+         */
+        function createVersionCard(data) {
+            const isLatest = data.isLatest;
+            const isExpanded = data.id === currentExpandedId;
+
+            // Header 樣式
+            const headerClasses = isLatest 
+                ? 'bg-emerald-500 text-white shadow-xl hover:bg-emerald-600'
+                : 'bg-gray-100 text-gray-800 shadow-md hover:bg-gray-200';
+
+            // Icon 顏色
+            const iconColor = isLatest ? 'text-white' : 'text-gray-500';
+            
+            // 內容區塊背景顏色: 最新版用淡綠, 舊版用白色
+            const contentBgClass = isLatest ? 'bg-emerald-50' : 'bg-white';
+
+            // 內容區塊的展開/收合樣式
+            const contentClasses = `collapsible-content ${isExpanded ? 'expanded' : ''}`;
+            
+            // 箭頭狀態反轉。展開時不旋轉 (指向下)，收合時旋轉 (指向上)。
+            const iconStateClass = isExpanded ? '' : 'transform rotate-180';
+
+            // 詳細內容列表
+            const detailsHtml = data.details.map(detail => `
+                <li class="flex items-start mb-2">
+                    <svg class="w-4 h-4 mt-1 mr-2 flex-shrink-0 text-emerald-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                    <span class="text-gray-700">${detail}</span>
+                </li>
+            `).join('');
+
+            return `
+                <div class="rounded-xl overflow-hidden border border-gray-200" id="card-${data.id}">
+                    <!-- 可點擊的標題 (Header) - 調整內邊距為 p-3 sm:p-4 -->
+                    <div 
+                        class="p-3 sm:p-4 flex justify-between items-center cursor-pointer transition duration-200 ease-in-out ${headerClasses}"
+                        data-version-id="${data.id}"
+                        onclick="toggleContent('${data.id}')"
+                    >
+                        <div class="flex items-center space-x-4">
+                            <h2 class="text-lg font-semibold">${data.version}</h2>
+                            ${isLatest ? '<span class="text-xs font-bold px-3 py-1 rounded-full bg-yellow-300 text-gray-900 shadow-md">最新版本</span>' : ''}
+                        </div>
+                        
+                        <!-- 箭頭圖標 (旋轉表示展開/收合) -->
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 transition-transform duration-300 ${iconStateClass} ${iconColor}" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
+                        </div>
+                    </div>
+
+                    <!-- 內容區塊 (Content) - 使用條件式背景色 -->
+                    <div id="content-${data.id}" class="${contentClasses} ${contentBgClass}">
+                        <!-- Ul 元素負責水平 padding (px-4/sm:px-6) 和垂直 margin (瞬間應用) -->
+                        <ul class="list-none space-y-2 px-4 sm:px-6">
+                            ${detailsHtml}
+                        </ul>
+                    </div>
+                </div>
+            `;
+        }
+        
+        /**
+         * 處理 transitionend 事件的監聽器
+         * 使用 currentExpandedId 判斷是展開結束還是收合結束
+         */
+        const handleTransitionEnd = (event) => {
+            const targetContent = event.currentTarget;
+            
+            // 確保只處理 max-height 的過渡
+            if (event.propertyName !== 'max-height') return;
+
+            const targetId = targetContent.id.replace('content-', '');
+
+            // 判斷是展開結束還是收合結束
+            if (currentExpandedId === targetId) {
+                // Case 1: 展開結束 (Expand Finished)
+                // max-height 已經到達目標高度，現在安全地設為 'none'，恢復響應式
+                targetContent.style.maxHeight = 'none';
+            } else {
+                // Case 2: 收合結束 (Collapse Finished)
+                // max-height 已經是 0，現在安全移除 'expanded' 類別，進行最終清理 (移除 margin/opacity)
+                targetContent.classList.remove('expanded'); 
+            }
+            
+            // 移除監聽器以防止多次觸發
+            targetContent.removeEventListener('transitionend', handleTransitionEnd);
+        };
+
+
+        /**
+         * 處理點擊事件，切換內容的展開/收合 (手風琴效果)
+         */
+        function toggleContent(targetId) {
+            
+            // 取得箭頭圖標
+            const icon = document.getElementById(`content-${targetId}`).previousElementSibling.querySelector('svg');
+            
+            // 如果點擊的是目前已展開的項目，則收合它
+            if (targetId === currentExpandedId) {
+                const currentContent = document.getElementById(`content-${currentExpandedId}`);
+                if (currentContent) {
+                    // 1. 設置為當前實際高度 (如果先前是 'none' 必須先轉為像素值)
+                    currentContent.style.maxHeight = currentContent.scrollHeight + "px";
+                    
+                    // 2. 添加 transitionend 監聽器
+                    currentContent.addEventListener('transitionend', handleTransitionEnd);
+                    
+                    // 3. 在下一幀開始過渡到 0，保留 'expanded' 類別！
+                    requestAnimationFrame(() => {
+                        currentContent.style.maxHeight = 0;
+                    });
+                    
+                    // 收合時，箭頭應指向上方 (旋轉 180 度)
+                    icon.classList.add('rotate-180');
+                }
+                currentExpandedId = null; // 設置為 null，表示收合意圖
+                return;
+            }
+
+            // 1. 收合先前展開的內容 (如果有的話)
+            if (currentExpandedId) {
+                const prevContent = document.getElementById(`content-${currentExpandedId}`);
+                if (prevContent) {
+                    // 設置為當前實際高度，然後過渡到 0
+                    prevContent.style.maxHeight = prevContent.scrollHeight + "px";
+                    
+                    // 添加 transitionend 監聽器
+                    prevContent.addEventListener('transitionend', handleTransitionEnd);
+                    
+                    requestAnimationFrame(() => {
+                        prevContent.style.maxHeight = 0;
+                    });
+                    
+                    // 旋轉先前項目的箭頭，使其指向上方 (收合狀態)
+                    const prevIcon = prevContent.previousElementSibling.querySelector('svg');
+                    prevIcon.classList.add('rotate-180');
+                }
+            }
+
+            // 2. 展開新的內容
+            const targetContent = document.getElementById(`content-${targetId}`);
+            if (targetContent) {
+                // 1. 立即添加 expanded class (margin 和 opacity 瞬間應用)
+                targetContent.classList.add('expanded'); 
+                
+                // 2. 讀取 scrollHeight (由於 margin 是瞬間應用的，此時讀取是精確的)
+                const contentHeight = targetContent.scrollHeight;
+                
+                // 3. 設置為精確高度，並添加 transitionend 監聽器
+                targetContent.addEventListener('transitionend', handleTransitionEnd);
+
+                // 4. 在下一幀設置 max-height 為精確高度，啟動動畫
+                requestAnimationFrame(() => {
+                    targetContent.style.maxHeight = contentHeight + "px";
+                });
+                
+                // 展開時，箭頭應指向下方 (移除旋轉)
+                icon.classList.remove('rotate-180');
+                currentExpandedId = targetId; // 設置為目標 ID，表示展開意圖
+            }
+        }
+
+        /**
+         * 網頁載入完成後執行渲染
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('changelog-container');
+            const html = versionData.map(createVersionCard).join('');
+            container.innerHTML = html;
+
+            // 修正初始化邏輯：最新的版本需要覆蓋 CSS 的 max-height: 0
+            if (currentExpandedId) {
+                const latestContent = document.getElementById(`content-${currentExpandedId}`);
+                const latestHeader = document.querySelector(`[data-version-id="${currentExpandedId}"]`);
+
+                if (latestContent) {
+                    // 確保 latestContent 有 expanded 樣式
+                    latestContent.classList.add('expanded');
+                    // 關鍵修正：將 max-height 設為 'none'，讓內容在載入時完全展開並保持響應式
+                    latestContent.style.maxHeight = 'none'; 
+                }
+                
+                if (latestHeader) {
+                    // 初始化時，展開的項目箭頭應指向下方 (移除旋轉)
+                    const latestIcon = latestHeader.querySelector('svg');
+                    latestIcon.classList.remove('rotate-180');
+                }
+            }
+        });
+    </script>
+
+</body>
 </html>

@@ -48,8 +48,11 @@
             開發者聲明
         </h2>
         <!-- 核心摘要 - 內文改為 text-lg -->
-        <div class="bg-indigo-50 p-4 rounded-lg text-text-strong font-semibold text-lg">
+        <div class="bg-indigo-50 p-4 rounded-lg text-text-strong font-semibold text-lg space-y-2">
             <p>
+                本隱私權政策適用於由 <span class="underline decoration-primary font-bold">Daily ideas</span> 所開發與發布之應用程式「<span id="app-name" class="underline decoration-primary font-bold">[應用程式名稱]</span>」（以下簡稱「本作品」）。
+            </p>
+            <p class="text-base font-normal text-text-soft">
                 簡單講，本作品不會收集您的個人敏感資訊，所以更不可能私自使用、或與他人分享、販售您的個資。
             </p>
         </div>
@@ -113,6 +116,37 @@
     </footer>
 
 </div>
+
+<script>
+    (function() {
+        // 【設定區】在此建立 app 代號與真實名稱的對應表
+        const APP_MAP = {
+            "net.coliam.calculator": "記憶計算機",
+            "net.coliam.calculator.donate": "記憶計算機 尊榮版",
+			"net.coliam.stock.counting": "台股神算",
+			"net.coliam.stock.counting.donate": "台股神算 尊榮版",
+			"net.coliam.friendly.tpbfr": "TAIPEI Friendly Lactation room",
+			"net.coliam.tpbfr": "TAIPEI Breastfeeding rooms",
+			"net.coliam.twbf": "愛哺乳 台灣哺乳室 (BETA)",
+			"net.coliam.tpgd": "自備餐具賺摳摳",
+			"net.coliam.flashlight": "Quick Light (Flashlight)",
+			"app.vivid.interestcal.free": "利霸王 利息計算機",
+            "com.rep.readtiobe_3": "BMI 測試"
+        };
+
+        // 讀取網址參數
+        const urlParams = new URLSearchParams(window.location.search);
+        const appKey = urlParams.get('app');
+		
+        // 根據 app 參數自動對應並填入應用程式名稱
+        if (appKey && APP_MAP[appKey]) {
+            const appElement = document.getElementById('app-name');
+            if (appElement) {
+                appElement.textContent = APP_MAP[appKey];
+            }
+        }
+    })();
+</script>
 
 </body>
 </html>
